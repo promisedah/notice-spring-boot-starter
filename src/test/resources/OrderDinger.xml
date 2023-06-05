@@ -3,10 +3,10 @@
 <!DOCTYPE dinger PUBLIC "-//AnswerAIL//DTD Dinger 2.0//EN" "dinger.dtd">
 
 <!--
-	spring.dinger.dinger-locations: classpath*:dinger/*.xml
+	notice.default.dinger-locations: classpath*:dinger/*.xml
 -->
 
-<dinger namespace="com.github.jaemon.dinger.core.OrderDinger">
+<dinger namespace="com.github.yunmo.dinger.core.OrderDinger">
 
 	<message id="orderSuccess" type="TEXT">
 		<body>

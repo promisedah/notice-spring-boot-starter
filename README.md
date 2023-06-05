@@ -1,156 +1,212 @@
-# Dinger(叮鸽) ![GitHub license](https://img.shields.io/github/license/AnswerAIL/dingtalk-spring-boot-starter)
-[![Dinger Logo](https://gitee.com/jaemon/docs/raw/master/dinger.png)](https://github.com/AnswerAIL/dingtalk-spring-boot-starter)
+# Notice
 
+## 通知介绍
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.github.answerail/dinger-spring-boot-starter)](https://mvnrepository.com/artifact/com.github.answerail/dinger-spring-boot-starter)
-[![GitHub stars](https://img.shields.io/github/stars/AnswerAIL/dingtalk-spring-boot-starter.svg?style=social)](https://github.com/AnswerAIL/dingtalk-spring-boot-starter)
-[![Gitee stars](https://gitee.com/jaemon/dingtalk-spring-boot-starter/badge/star.svg?theme=dark)](https://gitee.com/jaemon/dingtalk-spring-boot-starter)
-![JDK](https://img.shields.io/badge/JDK-1.8+-green?logo=appveyor)
-![SpringBoot](https://img.shields.io/badge/springboot-1.x%20&%202.x-green?logo=appveyor)
+支持企业微信、钉钉等通知..
 
+支持@成员通知..
 
-&nbsp;
+支持多机器人通知..
 
+支持同步、异步通知..
 
-## What(Dinger是什么)
-Dinger是一个以SpringBoot框架为基础开发的消息发送中间件， 对如下移动办公系统的群机器人API做了一层封装，让使用更简单便捷。
-- [钉钉](https://open.dingtalk.com/document/group/custom-robot-access)
-- [企业微信](https://developer.work.weixin.qq.com/document/path/91770)
-- [飞书](https://open.feishu.cn/document/ukTMukTMukTM/ucTM5YjL3ETO24yNxkjN#756b882f)
+### 全局默认通知
 
-只需要简单的配置（最简单的发送功能只需要一行代码），即可快速的在springboot项目中将消息发送到指定的钉钉或企业微信群聊中。
+- 默认配置
+    - <font color = 'red'> 默认DingerSender暂不支持多机器人配置，仅支持默认机器人配置</font>
 
-- [Dinger在线文档](https://answerail.gitee.io/docsify-jaemon)
+- 支持@成员通知
+    - 企业微信目前仅支持TEXT类型通过手机号/userid @成员。（MARKDOWN类型消息企业微信暂不支持@成员
 
-- [Dinger QQ交流群： 1002507383](https://jq.qq.com/?_wv=1027&k=xbcwxp0i)
+### 全局多机器人通知
 
-&nbsp;
+#### 背景：
 
-***
+企业微信机器人通知频率受限 60次/min
 
-## Why(为什么用Dinger)
- - [x] 配置简单，上手容易，无需花费太多精力在群机器人API的使用上；
- - [x] 插拔式功能组件，和业务代码解耦；
- - [x] 核心功能面向接口编程, 可以据具体业务对功能进行定制化来满足不同的业务需求；
- - [x] 支持集中式管理消息，提供xml标签，支持编写动态消息体；
- - [x] 基于具体消息编程，消息体可支持XML标签方式配置和注解方式定义；
- - [x] 支持钉钉、企业微信、飞书群机器人一键切换使用和混合使用；
+叮叮机器人通知频率受限 20次/min。
 
-&nbsp;
+由于高发情况下可能会出现单个机器人通知超频率受限无法发送通知，所以就有了多机器人配置。
 
-### 支持Dinger
-> ★ **欢迎『[Github](https://github.com/AnswerAIL/dingtalk-spring-boot-starter)』 或 『[Gitee](https://gitee.com/jaemon/dingtalk-spring-boot-starter)』点下Star让更多码友知道Dinger的存在**
+#### 功能说明：
 
-> ❤ [Gitee捐赠](https://gitee.com/jaemon/dingtalk-spring-boot-starter): 如果觉得Dinger不错, 条件允许的话捐赠杯奶茶犒劳下维护者, 感谢您的支持和鼓励^_^。
+- 支持多机器人通知配置
+- 支持分业务线通知配置
+    - 接口级别定义（推荐
+    - 代码级别注入（不推荐
+- 支持全局开启多机器人配置
+    - 配合接口级别定义使用
+    - <font color = 'red'> 默认DingerSender暂不支持多机器人配置，仅支持默认机器人配置</font>
+- 支持@成员通知
+    - 企业微信目前仅支持TEXT类型通过手机号/userid @成员。（MARKDOWN类型消息企业微信暂不支持@成员
 
-&nbsp;
+## 单机器人全局通知
 
-***
+此类型通知采用默认通知配置，不支持多机器人配置
 
-## How(如何使用Dinger-快速使用)
-### 一、引入依赖
-```xml
-<dependency>
-    <groupId>com.github.answerail</groupId>
-    <artifactId>dinger-spring-boot-starter</artifactId>
-    <version>${dinger.version}</version>
-</dependency>
-```
-> **dinger.version版本号取值** ☞ [Github](https://github.com/AnswerAIL/dingtalk-spring-boot-starter/wiki/Dinger-1.1-Upgrade-Log) 或 [Gitee](https://gitee.com/jaemon/dingtalk-spring-boot-starter/wikis/Dinger-1.1-Upgrade-Log?sort_id=3312594)
+1. 配置默认机器人信息
 
-&nbsp;
+   ``` yaml
+   notice:
+   	# 默认通知配置必须
+     default:
+       enable: true
+       project-id: ${spring.application.name}
+       config:
+        	# 配置开启企业微信通知
+         we-talk:
+           token-id: e74e267e-c0f3-4c06-8e7c-d8796c4bd0a9
+   ```
 
-### 二、application.yml 配置
-**使用钉钉群机器人配置**
-```yaml
-spring:
-  dinger:
-    project-id: ${spring.application.name}
-    dingers:
-      # 使用钉钉机器人, 请根据自己机器人配置信息进行修改
-      dingtalk:
-        tokenId: 87dbeb7bc28894c3ycyl3d12457228ad309966275b5f427cd85f9025ebb520cf
-        secret: AEQ74a9039ai01f2ljm017b90ycye9asg6335f97c658ff37ff371ec8120581c7f09
-```
+2. 调用通知
 
-**使用企业微信群机器人配置**
-```yaml
-spring:
-  dinger:
-    project-id: ${spring.application.name}
-    dingers:
-      # 使用企业微信机器人, 请根据自己机器人配置信息进行修改
-      wetalk:
-        token-id: 32865206-7082-46l5-8j39-2m7ycy6d868
-```
+   ``` java
+        // ...
+        @Autowired
+        DingerSender dingerSender;
+        
+        public void send (){
+          // 调用通知
+          dingerSender.send(MessageSubType.TEXT, DingerRequest.request("EfNoticeWebApplication"+ LocalDateTime.now()));
+        }  
+        // ...
+   ```
 
-**使用飞书群机器人配置**
-```yaml
-spring:
-  dinger:
-    project-id: ${spring.application.name}
-    dingers:
-      # 使用飞书机器人, 请根据自己机器人配置信息进行修改
-      bytetalk:
-        token-id: 20200528-0824-20jm-21hy-5yc556210y15
-```
+## 多机器人通知配置
 
-&nbsp;
+### 全局多机器人
 
-### 三、代码中使用
-```java
-@Component
-public class AppInit implements InitializingBean {
+1. 配置多机器人信息
+
+   ``` yaml
+   notice:
+   	# 默认通知配置必须
+     default:
+       enable: true
+       project-id: ${spring.application.name}
+       config:
+         we-talk:
+           token-id: e74e267e-c0f3-4c06-8e7c-d8796c4bd0a9
+     multi:
+       enable: true
+       we-talk:
+       	# 同步触发
+         token-ids:
+           - e3605089-7fcc-4eb1-a1a2-2b6c513d36d6
+           - d03c94f9-b3f5-4d3b-965a-a5fe8526bd72
+           - ee8e81b8-d6b3-4a2b-822b-8aa27df4805d
+         # 异步
+         # async-token-ids:
+   			# 	- e3605089-7fcc-4eb1-a1a2-2b6c513d36d6
+   ```
+
+2. 启动类添加@EnableMultiDinger注解，并指定对应多机器人配置信息（采用轮训算法
+
+   ``` java
+   @SpringBootApplication
+   @EnableMultiDinger(@MultiDinger(dinger = DingerType.WETALK,handler = WeTalkMultiHandler.class)) //全局开启企业微信多机器人通知配置
+   public class EfNoticeWebApplication {
+     // ...
+   }
+   ```
+
+3. 定义通知接口
+
+   ``` java
+   public interface Sender {
+     @DingerText(value = "恭喜用户${loginName}登录成功!")
+     DingerResponse success(@Parameter("loginName") String userName);
+   }
+   ```
+
+4. 调用
+
+   ``` java
+    // ...
     @Autowired
-    private DingerSender dingerSender;
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        // 发送text类型消息
-        dingerSender.send(
-                MessageSubType.TEXT,
-                DingerRequest.request("Hello World, Hello Dinger")
-        );
-
-        // 发送markdown类型消息
-        dingerSender.send(
-                MessageSubType.MARKDOWN,
-                DingerRequest.request("Hello World, Hello Dinger", "启动通知")
-        );
+    private Sender sender;
+    
+    public void send (){
+      sender.success("1");
+      sender.success("2");
+      sender.success("3");
+      sender.success("4");
     }
+    
+    // ...
+   ```
+
+采用默认handler实现（三机器人配置+轮询算法）实现效果如下：
+
+![image-20230417130620498](/Users/yunmo/Library/Application Support/typora-user-images/image-20230417130620498.png)
+
+### 接口级别自定义
+
+1. 配置多机器人信息
+
+``` yaml
+notice:
+	# 默认通知配置必须
+  default:
+    enable: true
+    project-id: ${spring.application.name}
+    config:
+      we-talk:
+        token-id: e74e267e-c0f3-4c06-8e7c-d8796c4bd0a9
+  multi:
+    enable: true
+    we-talk:
+    	# 同步触发
+      token-ids:
+        - e3605089-7fcc-4eb1-a1a2-2b6c513d36d6
+        - d03c94f9-b3f5-4d3b-965a-a5fe8526bd72
+        - ee8e81b8-d6b3-4a2b-822b-8aa27df4805d
+      # 异步
+      # async-token-ids:
+			# 	- e3605089-7fcc-4eb1-a1a2-2b6c513d36d6
+```
+
+2. 开启配置
+    1. 启动类添加@EnableMultiDinger注解
+    2. 增加包扫描配置
+
+``` java
+@SpringBootApplication
+@EnableMultiDinger // 启用多机器人
+@DingerScan(basePackages = {"com.itiaoling.ef.notice.*"}) // basePackages改为你的项目路径
+public class EfNoticeWebApplication {
+  // ...
 }
 ```
-更多功能请移步 『[Github Dinger wiki](https://github.com/AnswerAIL/dingtalk-spring-boot-starter/wiki)』 或 『[Gitee Dinger wiki](https://gitee.com/jaemon/dingtalk-spring-boot-starter/wikis)』
 
+3. 定义通知接口
 
-&nbsp;
+``` java
+// 指定类型以及处理实现
+@MultiHandler(@MultiDinger(dinger = DingerType.WETALK,handler = WeTalkMultiHandler.class))
+public interface Sender {
+  @DingerText(value = "恭喜用户${loginName}登录成功!",phones = {"********"}) //phones 指定需要@的用户手机号
+  DingerResponse success(@Parameter("loginName") String userName);
+}
+```
 
+4. 调用
 
-## Documentation, Getting Started and Developer Guides
-- [Dinger在线文档](https://answerail.gitee.io/docsify-jaemon)
+``` java
+  // ...
+  @Autowired
+  private Sender sender;
 
-- [Dinger Wiki-Github](https://github.com/AnswerAIL/dingtalk-spring-boot-starter/wiki)
+  public void send (){
+    sender.success("1");
+    sender.success("2");
+    sender.success("3");
+    sender.success("4");
+  }
 
-- [Dinger Wiki-Gitee](https://gitee.com/jaemon/dingtalk-spring-boot-starter/wikis)
+// ...
+```
 
+采用默认handler实现@成员通知（三机器人配置+轮询算法）实现效果如下：
 
-&nbsp;
-
-
-## Upgrade Log
-- [版本变更日志-Github](https://github.com/AnswerAIL/dingtalk-spring-boot-starter/wiki/Dinger-1.1-Upgrade-Log)
-
-- [版本变更日志-Gitee](https://gitee.com/jaemon/dingtalk-spring-boot-starter/wikis/Dinger-1.1-Upgrade-Log)
-
-
-&nbsp;
-
-
-## Feedback
-✍ **有任何建议或问题欢迎提Issue~**
-
-- [Issues-Github](https://github.com/AnswerAIL/dingtalk-spring-boot-starter/issues)
-
-- [Issues-Gitee](https://gitee.com/jaemon/dingtalk-spring-boot-starter/issues)
-***
-
-&nbsp;
+![image-20230417132820863](/Users/yunmo/Library/Application Support/typora-user-images/image-20230417132820863.png)
