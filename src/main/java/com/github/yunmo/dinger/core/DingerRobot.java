@@ -67,6 +67,7 @@ public class DingerRobot extends AbstractDingerSender {
         MsgType msgType = messageSubType.msgType(
                 dingerType, request
         );
+        // TODO 这里可以修改
 //        MultiDingerConfig multiDingerConfig =
 //                MultiDingerConfigContainer
 //                        .INSTANCE.get(useDinger, dingerClassName);
@@ -80,9 +81,9 @@ public class DingerRobot extends AbstractDingerSender {
 //                            DingerConfig.instance(dingerType,dinger.getTokenId())
 //                    );
 //        }
-        if (dingerConfig != null) {
-            DingerHelper.assignDinger(dingerConfig);
-        }
+//        if (dingerConfig != null) {
+//            DingerHelper.assignDinger(dingerConfig);
+//        }
         return send(msgType);
     }
 
