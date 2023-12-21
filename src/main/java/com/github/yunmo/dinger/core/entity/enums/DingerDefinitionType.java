@@ -94,6 +94,8 @@ public enum DingerDefinitionType {
             DingerType.BYTETALK, MessageMainType.ANNOTATION, MessageSubType.TEXT, FeiShuDefinitionGenerator.AnnotationText.class
     ),
 
+    // TODO 增加飞书POST注解支持
+
     ;
     public static final DingerDefinitionType[] dingerDefinitionTypes = values();
 

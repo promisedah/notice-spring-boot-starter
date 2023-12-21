@@ -30,7 +30,7 @@ public class WeMarkdown extends WeTalkMessage {
     private Markdown markdown;
 
     public WeMarkdown(Markdown markdown) {
-        setMsgtype(WeTalkMsgType.MARKDOWN.type());
+        setMsgType(WeTalkMsgType.MARKDOWN.type());
         this.markdown = markdown;
     }
 

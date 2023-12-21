@@ -19,14 +19,22 @@ package com.github.yunmo.dinger.bytetalk.entity.enums;
  * ByteTalk支持的消息类型
  *
  * @author Jaemon
- * @since 1.0
+ * @author zhangyihao
+ * @since 1.1 增加消息类型支持
  */
 public enum ByteTalkMsgType {
     /**
      * text类型
      */
     TEXT("text"),
-
+    /**
+     * post类型，富文本消息
+     */
+    POST("post"),
+    /**
+     * 图片类型
+     */
+    IMAGE("image"),
     ;
 
     private String type;

@@ -34,7 +34,7 @@ public class DingText extends Message {
     private Text text;
 
     public DingText(Text text) {
-        setMsgtype(DingTalkMsgType.TEXT.type());
+        setMsgType(DingTalkMsgType.TEXT.type());
         this.text = text;
     }
 

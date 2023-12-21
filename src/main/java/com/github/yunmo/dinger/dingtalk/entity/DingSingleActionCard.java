@@ -33,7 +33,7 @@ public class DingSingleActionCard extends DingTalkMessage {
     private SingleActionCard actionCard;
 
     public DingSingleActionCard() {
-        setMsgtype(DingTalkMsgType.ACTION_CARD.type());
+        setMsgType(DingTalkMsgType.ACTION_CARD.type());
     }
 
     public SingleActionCard getActionCard() {

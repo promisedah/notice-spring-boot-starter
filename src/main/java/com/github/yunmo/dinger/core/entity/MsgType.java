@@ -38,7 +38,7 @@ public class MsgType implements Serializable {
      * */
     private volatile DingerType dingerType;
 
-    private String msgtype;
+    private String msgType;
 
     public DingerType getDingerType() {
         return dingerType;
@@ -48,12 +48,12 @@ public class MsgType implements Serializable {
         this.dingerType = dingerType;
     }
 
-    public String getMsgtype() {
-        return msgtype;
+    public String getMsgType() {
+        return msgType;
     }
 
-    public void setMsgtype(String msgtype) {
-        this.msgtype = msgtype;
+    public void setMsgType(String msgType) {
+        this.msgType = msgType;
     }
 
     /**

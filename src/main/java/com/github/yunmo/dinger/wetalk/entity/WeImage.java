@@ -33,7 +33,7 @@ public class WeImage extends WeTalkMessage {
     private Image image;
 
     public WeImage() {
-        setMsgtype(WeTalkMsgType.IMAGE.type());
+        setMsgType(WeTalkMsgType.IMAGE.type());
     }
 
     public Image getImage() {

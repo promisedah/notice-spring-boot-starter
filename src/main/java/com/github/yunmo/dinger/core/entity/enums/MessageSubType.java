@@ -15,6 +15,7 @@
  */
 package com.github.yunmo.dinger.core.entity.enums;
 
+import com.github.yunmo.dinger.bytetalk.entity.BytePost;
 import com.github.yunmo.dinger.bytetalk.entity.ByteText;
 import com.github.yunmo.dinger.core.entity.DingerRequest;
 import com.github.yunmo.dinger.dingtalk.entity.*;
@@ -139,6 +140,20 @@ public enum MessageSubType {
         public MsgType msgType(DingerType dingerType, DingerRequest request) {
             if (dingerType == DingerType.DINGTALK) {
                 return new DingLink();
+            } else {
+                throw new DingerException(DINGER_UNSUPPORT_MESSAGE_TYPE_EXCEPTION, dingerType, this.name());
+            }
+        }
+    },
+
+    /**
+     * POST类型, 只支持 {@link DingerType#BYTETALK}
+     */
+    POST(false){
+        @Override
+        public MsgType msgType(DingerType dingerType, DingerRequest request) {
+            if (dingerType == DingerType.BYTETALK) {
+                return new BytePost();
             } else {
                 throw new DingerException(DINGER_UNSUPPORT_MESSAGE_TYPE_EXCEPTION, dingerType, this.name());
             }

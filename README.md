@@ -1,5 +1,8 @@
 # Notice
 
+# deploy
+>  mvn deploy -Dgpg.skip=true -s /usr/local/apache-maven-3.8.4/conf/settings_itiaoling_now.xml
+
 ## 通知介绍
 
 支持企业微信、钉钉等通知..

@@ -32,7 +32,7 @@ public class WeText extends WeTalkMessage {
     private Text text;
 
     public WeText(Text text) {
-        setMsgtype(WeTalkMsgType.TEXT.type());
+        setMsgType(WeTalkMsgType.TEXT.type());
         this.text = text;
     }
 

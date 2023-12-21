@@ -120,9 +120,10 @@ public abstract class AbstractDingerDefinitionResolver<T> extends DingerListener
                     dingerDefinitionGeneratorMap.get(key);
             if (dingerDefinitionGeneratorClass == null) {
 //                throw new DingerException(ExceptionEnum.DINGERDEFINITIONTYPE_UNDEFINED_KEY, key);
-                if (debugEnabled) {
-                    log.debug("当前key=%s在DingerDefinitionType中没定义", key);
-                }
+//                if (debugEnabled) {
+//                    log.debug("当前key={}在DingerDefinitionType中没定义", key);
+//                }
+                log.warn("当前key={}在DingerDefinitionType中没定义", key);
                 continue;
             }
 

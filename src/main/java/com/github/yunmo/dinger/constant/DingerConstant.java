@@ -41,6 +41,10 @@ public interface DingerConstant {
     /**
      * bean name
      */
+    String POST_MESSAGE = "postMessage";
+    /**
+     * bean name
+     */
     String DINGER_EXECUTOR = "dingerExecutor";
     /** 自定义restTemplate名称 */
     String DINGER_REST_TEMPLATE = "dingerRestTemplate";

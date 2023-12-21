@@ -36,7 +36,7 @@ public class DingFeedCard extends DingTalkMessage {
     private FeedCard feedCard;
 
     public DingFeedCard() {
-        setMsgtype(DingTalkMsgType.FEED_CARD.type());
+        setMsgType(DingTalkMsgType.FEED_CARD.type());
     }
 
     public DingFeedCard(List<FeedCard.Link> links) {

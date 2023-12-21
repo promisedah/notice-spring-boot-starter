@@ -34,7 +34,7 @@ public class WeNews extends WeTalkMessage {
     private News news;
 
     public WeNews() {
-        setMsgtype(WeTalkMsgType.NEWS.type());
+        setMsgType(WeTalkMsgType.NEWS.type());
     }
 
     public WeNews(List<News.Article> articles) {
