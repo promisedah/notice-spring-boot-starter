@@ -22,6 +22,7 @@ import com.github.yunmo.dinger.core.entity.DingerProperties;
 import com.github.yunmo.dinger.core.entity.MsgType;
 import com.github.yunmo.dinger.core.entity.enums.DingerType;
 import com.github.yunmo.dinger.core.entity.DingerResponse;
+import com.github.yunmo.dinger.core.entity.enums.ExceptionEnum;
 import com.github.yunmo.dinger.core.entity.enums.PhoneParamType;
 import com.github.yunmo.dinger.multi.MultiDingerConfigContainer;
 import com.github.yunmo.dinger.multi.MultiDingerProperty;
@@ -264,6 +265,8 @@ public class DingerMessageHandler
                     .Container.INSTANCE.get(dingerName);
 
             if (dingerDefinition == null) {
+                final String message = ExceptionEnum.DINGER_UNSUPPORT_MESSAGE_TYPE_EXCEPTION.message(useDinger, dingerName);
+                log.warn("dingerDefinition is null. un support message type: {} ", message);
                 return null;
             }
             DingerConfig dingerMethodDefaultDingerConfig = dingerDefinition.dingerConfig();

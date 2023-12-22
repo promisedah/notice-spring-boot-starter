@@ -91,7 +91,7 @@ public enum ExceptionEnum implements ExceptionPairs {
     /** Multi Dinger解析相关异常, 70XX */
     DINGER_CONFIG_HANDLER_EXCEPTION(7000, "%s中指定的dingerconfigs[%d]数据异常"),
     MULTIDINGER_ALGORITHM_EXCEPTION(7001, "%s中算法为空"),
-    MULTIDINGER_ANNOTATTION_EXCEPTION(7002, "%s中的MultiDinger.dinger=%s已经被警用"),
+    MULTIDINGER_ANNOTATTION_EXCEPTION(7002, "%s中的MultiDinger.dinger=%s已经被禁用"),
 
     /** Multi Dinger属性注入相关异常, 75XX */
     ALGORITHM_FIELD_INSTANCE_NOT_EXISTS(7500, "算法[%s]中属性字段[%s]实例不存在"),
