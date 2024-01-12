@@ -46,6 +46,11 @@ public class DingerProperties implements InitializingBean {
     private boolean enabled = true;
 
     /**
+     * title前缀，只生效于 {@link com.github.yunmo.dinger.DingerSender}
+     */
+    private String titlePrefix;
+
+    /**
      * dinger类型 <code>key={@link DingerType}, value={@link Dinger}</code>, 必填
      */
     private Map<DingerType, Dinger> config = new LinkedHashMap<>();
@@ -106,6 +111,15 @@ public class DingerProperties implements InitializingBean {
 
     public void setDefaultDinger(DingerType defaultDinger) {
         this.defaultDinger = defaultDinger;
+    }
+
+    public String getTitlePrefix() {
+        return titlePrefix;
+    }
+
+    public DingerProperties setTitlePrefix(String titlePrefix) {
+        this.titlePrefix = titlePrefix;
+        return this;
     }
 
     public static class Dinger {
