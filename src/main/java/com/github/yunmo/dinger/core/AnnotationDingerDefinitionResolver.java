@@ -15,10 +15,7 @@
  */
 package com.github.yunmo.dinger.core;
 
-import com.github.yunmo.dinger.core.annatations.DingerImageText;
-import com.github.yunmo.dinger.core.annatations.DingerLink;
-import com.github.yunmo.dinger.core.annatations.DingerMarkdown;
-import com.github.yunmo.dinger.core.annatations.DingerText;
+import com.github.yunmo.dinger.core.annatations.*;
 import com.github.yunmo.dinger.core.entity.DingerMethod;
 import com.github.yunmo.dinger.core.entity.enums.MessageMainType;
 import com.github.yunmo.dinger.core.entity.enums.MessageSubType;
@@ -30,8 +27,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import static com.github.yunmo.dinger.constant.DingerConstant.SPOT_SEPERATOR;
-import static com.github.yunmo.dinger.core.entity.enums.ExceptionEnum.IMAGETEXT_METHOD_PARAM_EXCEPTION;
-import static com.github.yunmo.dinger.core.entity.enums.ExceptionEnum.LINK_METHOD_PARAM_EXCEPTION;
+import static com.github.yunmo.dinger.core.entity.enums.ExceptionEnum.*;
 import static com.github.yunmo.dinger.utils.DingerUtils.methodParamsGenericType;
 import static com.github.yunmo.dinger.utils.DingerUtils.methodParamsType;
 
@@ -79,6 +75,13 @@ public class AnnotationDingerDefinitionResolver extends AbstractDingerDefinition
                     }
                     source = method.getAnnotation(DingerLink.class);
                     messageSubType = MessageSubType.LINK;
+                } else if (method.isAnnotationPresent(DingerInteractive.class)) {
+                    paramTypes = methodParamsType(method, DingerInteractive.clazz);
+                    if (paramTypes.length != 1) {
+                        throw new DingerException(INTERACTIVE_METHOD_PARAM_EXCEPTION, dingerName);
+                    }
+                    source = method.getAnnotation(DingerInteractive.class);
+                    messageSubType = MessageSubType.INTERACTIVE;
                 } else {
                     if (log.isDebugEnabled()) {
                         log.debug("register annotation dingerDefinition and skip method={}(possible use xml definition).", dingerName);

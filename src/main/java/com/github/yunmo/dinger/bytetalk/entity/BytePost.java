@@ -1,6 +1,8 @@
 package com.github.yunmo.dinger.bytetalk.entity;
 
 import com.github.yunmo.dinger.bytetalk.entity.enums.ByteTalkMsgType;
+import com.github.yunmo.dinger.support.sign.SignBase;
+import com.github.yunmo.dinger.support.sign.SignResult;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -12,7 +14,7 @@ import java.util.Map;
  * @version v1.0
  */
 public class BytePost extends ByteTalkMessage {
-    private String msgType;
+    private String msg_type;
     private Content content;
 
     /**
@@ -25,7 +27,7 @@ public class BytePost extends ByteTalkMessage {
     private String sign;
 
     public BytePost(Content content) {
-        this.msgType = ByteTalkMsgType.POST.type();
+        this.msg_type = ByteTalkMsgType.POST.type();
         this.content = content;
     }
 
@@ -33,6 +35,15 @@ public class BytePost extends ByteTalkMessage {
         setMsgType(ByteTalkMsgType.POST.type());
     }
 
+    @Override
+    public void signAttributes(SignBase sign) {
+        if (sign == null || !(sign instanceof SignResult)) {
+            return;
+        }
+        SignResult signResult = (SignResult) sign;
+        this.timestamp = String.valueOf(signResult.getTimestamp());
+        this.sign = signResult.getSign();
+    }
     @Override
     public void transfer(Map<String, Object> params) {
         this.content.setText(replaceContent(this.content.getText(), params));
@@ -60,6 +71,42 @@ public class BytePost extends ByteTalkMessage {
         }
     }
 
+
+    public String getMsg_type() {
+        return msg_type;
+    }
+
+    public BytePost setMsg_type(String msg_type) {
+        this.msg_type = msg_type;
+        return this;
+    }
+
+    public Content getContent() {
+        return content;
+    }
+
+    public BytePost setContent(Content content) {
+        this.content = content;
+        return this;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public BytePost setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+        return this;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public BytePost setSign(String sign) {
+        this.sign = sign;
+        return this;
+    }
 }
 
     

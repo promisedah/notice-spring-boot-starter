@@ -83,7 +83,7 @@ public enum ExceptionEnum implements ExceptionPairs {
     METHOD_DEFINITION_EXCEPTION(6503, "方法%s定义不符合规范"),
     LINK_METHOD_PARAM_EXCEPTION(6504, "方法%s的参数不符合Link消息定义规范"),
     DINGER_UNSUPPORT_MESSAGE_TYPE_EXCEPTION(6505, "Dinger[%s]暂不支持消息类型[%s]"),
-
+    INTERACTIVE_METHOD_PARAM_EXCEPTION(6506, "方法%s的参数不符合Interactive消息定义规范"),
 
 
 

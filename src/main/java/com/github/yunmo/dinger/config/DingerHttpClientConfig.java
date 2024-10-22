@@ -15,6 +15,7 @@
  */
 package com.github.yunmo.dinger.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.yunmo.dinger.constant.DingerConstant;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -24,6 +25,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
@@ -56,7 +58,11 @@ public class DingerHttpClientConfig {
 
     @Bean(name = DingerConstant.DINGER_REST_TEMPLATE)
     public RestTemplate restTemplate(ClientHttpRequestFactory dingerClientHttpRequestFactory) {
-        return new RestTemplate(dingerClientHttpRequestFactory);
+        final RestTemplate restTemplate = new RestTemplate(dingerClientHttpRequestFactory);
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setObjectMapper(new ObjectMapper());
+        restTemplate.getMessageConverters().add(0, converter);
+        return restTemplate;
     }
 
     @Bean(name = "dingerClientHttpRequestFactory")

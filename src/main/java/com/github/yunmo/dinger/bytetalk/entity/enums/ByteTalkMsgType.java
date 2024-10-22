@@ -35,6 +35,10 @@ public enum ByteTalkMsgType {
      * 图片类型
      */
     IMAGE("image"),
+    /**
+     * 交互式卡片、自定义模版卡片
+     */
+    INTERACTIVE("interactive"),
     ;
 
     private String type;

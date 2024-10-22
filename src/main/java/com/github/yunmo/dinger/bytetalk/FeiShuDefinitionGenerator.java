@@ -19,6 +19,7 @@ import com.github.yunmo.dinger.core.DingerDefinition;
 import com.github.yunmo.dinger.core.DingerDefinitionGenerator;
 import com.github.yunmo.dinger.core.DingerDefinitionGeneratorContext;
 import com.github.yunmo.dinger.core.DingerDefinitionHandler;
+import com.github.yunmo.dinger.core.annatations.DingerInteractive;
 import com.github.yunmo.dinger.core.annatations.DingerText;
 import com.github.yunmo.dinger.core.entity.enums.DingerDefinitionType;
 import com.github.yunmo.dinger.core.entity.enums.DingerType;
@@ -51,6 +52,21 @@ public class FeiShuDefinitionGenerator extends DingerDefinitionHandler {
         @Override
         public DingerDefinition generator(DingerDefinitionGeneratorContext<MessageTag> context) {
             return xmlHandler(DingerDefinitionType.BYTETALK_XML_TEXT, context);
+        }
+    }
+
+
+    public static class AnnotationInteractive extends DingerDefinitionGenerator<DingerInteractive> {
+
+        /**
+         * 具体dinger definition生成逻辑
+         *
+         * @param context Dinger定义源
+         * @return dingerDefinition {@link DingerDefinition}
+         */
+        @Override
+        public DingerDefinition generator(DingerDefinitionGeneratorContext<DingerInteractive> context) {
+            return dingerInteractiveHandler(DingerType.BYTETALK, context);
         }
     }
 

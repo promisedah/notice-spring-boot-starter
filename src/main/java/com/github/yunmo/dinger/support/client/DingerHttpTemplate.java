@@ -15,6 +15,8 @@
  */
 package com.github.yunmo.dinger.support.client;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.yunmo.dinger.constant.DingerConstant;
 import com.github.yunmo.dinger.exception.SendMsgException;
 import org.springframework.beans.factory.annotation.Autowired;

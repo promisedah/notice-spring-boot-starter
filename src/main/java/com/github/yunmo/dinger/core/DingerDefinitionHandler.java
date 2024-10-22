@@ -299,4 +299,21 @@ public class DingerDefinitionHandler {
         return dingerConfig;
     }
 
+    protected static DingerDefinition dingerInteractiveHandler(DingerType dingerType,DingerDefinitionGeneratorContext<DingerInteractive> context) {
+        String keyName = context.getKeyName();
+        DingerInteractive dinger = context.getSource();
+        DingerDefinition dingerDefinition = annotationDingerDefition(keyName, dinger.tokenId(), dinger.asyncExecute());
+        dingerDefinition.setDingerType(dingerType);
+        dingerDefinition.setMessageSubType(MessageSubType.INTERACTIVE);
+        DingerRequest request;
+
+        if (dinger.atAll()) {
+        }
+
+        MsgType msgType = dingerDefinition.messageSubType().msgType(dingerType, null);
+        dingerDefinition.setMessage(msgType);
+
+        return dingerDefinition;
+    }
+
 }

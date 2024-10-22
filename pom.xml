@@ -7,7 +7,7 @@
     <groupId>com.github.promisedah</groupId>
     <artifactId>notice-spring-boot-starter</artifactId>
     <packaging>jar</packaging>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
 
     <name>notice-spring-boot-starter</name>
     <description>基于Dinger-SpringBoot集成钉钉/企业微信/飞书群机器人实现消息通知中间件</description>
@@ -53,7 +53,7 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
-            <scope>test</scope>
+            <scope>provided</scope>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
@@ -87,11 +87,11 @@
 
     <distributionManagement>
         <repository>
-            <id>releases</id>
+            <id>release</id>
             <url>http://nexus.itiaoling.com/repository/itiaoling-release/</url>
         </repository>
         <snapshotRepository>
-            <id>snapshots</id>
+            <id>snapshot</id>
             <url>http://nexus.itiaoling.com/repository/itiaoling-snapshot/</url>
         </snapshotRepository>
     </distributionManagement>

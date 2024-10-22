@@ -15,6 +15,7 @@
  */
 package com.github.yunmo.dinger.support.client;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.yunmo.dinger.exception.SendMsgException;
 
 import java.util.Map;
@@ -97,7 +98,7 @@ public interface DingerHttpClient {
      * @throws SendMsgException
      *          ex {@link SendMsgException}
      */
-    String post(String url, Map<String, String> headers, String message) throws SendMsgException;
+    String post(String url, Map<String, String> headers, String message) throws SendMsgException, JsonProcessingException;
 
 
     /**

@@ -15,6 +15,7 @@
  */
 package com.github.yunmo.dinger.core.entity.enums;
 
+import com.github.yunmo.dinger.bytetalk.entity.ByteInteractive;
 import com.github.yunmo.dinger.bytetalk.entity.BytePost;
 import com.github.yunmo.dinger.bytetalk.entity.ByteText;
 import com.github.yunmo.dinger.core.entity.DingerRequest;
@@ -154,6 +155,20 @@ public enum MessageSubType {
         public MsgType msgType(DingerType dingerType, DingerRequest request) {
             if (dingerType == DingerType.BYTETALK) {
                 return new BytePost();
+            } else {
+                throw new DingerException(DINGER_UNSUPPORT_MESSAGE_TYPE_EXCEPTION, dingerType, this.name());
+            }
+        }
+    },
+    /**
+     * INTERACTIVE类型, 只支持 {@link DingerType#BYTETALK}
+     */
+    INTERACTIVE(false){
+        @Override
+        public MsgType msgType(DingerType dingerType, DingerRequest request) {
+//            content = "<at id=\"all\">所有人</at>" + content;
+            if (dingerType == DingerType.BYTETALK) {
+                return new ByteInteractive();
             } else {
                 throw new DingerException(DINGER_UNSUPPORT_MESSAGE_TYPE_EXCEPTION, dingerType, this.name());
             }

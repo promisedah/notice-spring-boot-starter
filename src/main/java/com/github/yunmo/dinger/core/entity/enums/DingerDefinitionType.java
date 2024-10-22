@@ -93,7 +93,9 @@ public enum DingerDefinitionType {
     BYTETALK_ANNOTATION_TEXT(
             DingerType.BYTETALK, MessageMainType.ANNOTATION, MessageSubType.TEXT, FeiShuDefinitionGenerator.AnnotationText.class
     ),
-
+    BYTETALK_ANNOTATION_INTERACTIVE(
+            DingerType.BYTETALK, MessageMainType.ANNOTATION, MessageSubType.INTERACTIVE, FeiShuDefinitionGenerator.AnnotationInteractive.class
+    ),
     // TODO 增加飞书POST注解支持
 
     ;
